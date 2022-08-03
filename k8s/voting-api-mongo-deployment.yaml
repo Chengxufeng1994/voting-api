@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voting-api-mongo
+  template:
+    metadata:
+      labels:
+        app: voting-api-mongo
+    spec:
+      containers:
+        - name: voting-api-mongo
+          image: mongo

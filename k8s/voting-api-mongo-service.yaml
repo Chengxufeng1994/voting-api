@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-api-mongo
+spec:
+  selector:
+    app: voting-api-mongo
+  ports:
+  - name: voting-api-db
+    port: 27017
+    targetPort: 27017

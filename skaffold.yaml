@@ -1,12 +1,12 @@
 apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
-  name: poll-api
+  name: voting-api
 build:
   local:
     push: false
   artifacts:
-    - image: benny0329/poll-api
+    - image: benny0329/voting-api
       context: .
       docker:
         dockerfile: Dockerfile

@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poll-api-deployment
+  name: voting-api-deployment
 spec:
   selector:
     matchLabels:
-      app: poll-api
+      app: voting-api
   template:
     metadata:
       labels:
-        app: poll-api
+        app: voting-api
     spec:
       containers:
-      - name: poll-api
-        image: benny0329/poll-api
+      - name: voting-api
+        image: benny0329/voting-api
+        env:
+          - name: MONGO_URI
+            value: "mongodb://voting-api-mongo:27017/voting"
         resources:
           limits:
             memory: "512Mi"

@@ -7,13 +7,13 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-  - host: poll-api.io
+  - host: voting.io
     http:
       paths:
       - pathType: Prefix
         path: /api/?(.*)
         backend:
           service:
-            name: poll-api
+            name: voting-api
             port: 
               number: 3000
