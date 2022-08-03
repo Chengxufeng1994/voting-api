@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: poll-api
+build:
+  local:
+    push: false
+  artifacts:
+    - image: benny0329/poll-api
+      context: .
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+deploy:
+  kubectl:
+    manifests:
+      - "./k8s/*"

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poll-api-deployment
+spec:
+  selector:
+    matchLabels:
+      app: poll-api
+  template:
+    metadata:
+      labels:
+        app: poll-api
+    spec:
+      containers:
+      - name: poll-api
+        image: benny0329/poll-api
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
