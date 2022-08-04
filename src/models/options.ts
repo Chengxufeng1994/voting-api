@@ -10,8 +10,16 @@ const optionSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  created_at: {
+    type: Date,
+    required: true,
+  },
+  updated_at: {
+    type: Date,
+    required: true,
+  },
 });
 
 const Option = mongoose.model('Option', optionSchema);
 
-export { Option }
+export { Option };

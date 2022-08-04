@@ -24,6 +24,7 @@ export const getPollById = async (req: Request, res: Response) => {
   Poll.findById(pollId)
     .populate('user')
     .populate('voted')
+    .populate('options')
     .exec(function (err, poll) {
       if (err) {
         throw new Error('Poll not found');
