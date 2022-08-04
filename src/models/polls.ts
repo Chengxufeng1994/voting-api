@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface IPoll {
+interface pollDoc extends mongoose.Document {
   user: mongoose.Schema.Types.ObjectId;
   topic: string;
   options: [mongoose.Schema.Types.ObjectId];
@@ -37,14 +37,6 @@ const pollSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
-  // open_from: {
-  //   type: Date,
-  //   required: true,
-  // },
-  // open_to: {
-  //   type: Date,
-  //   required: true,
-  // },
   created_at: {
     type: Date,
     required: true,
@@ -55,8 +47,6 @@ const pollSchema = new mongoose.Schema({
   },
 });
 
-// pollSchema.pre('save', async () => {});
-
-const Poll = mongoose.model('Poll', pollSchema);
+const Poll = mongoose.model<pollDoc>('Poll', pollSchema);
 
 export { Poll };

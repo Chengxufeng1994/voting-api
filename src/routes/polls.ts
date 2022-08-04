@@ -10,5 +10,7 @@ router.get('/api/polls/inprogress', auth, pollsController.listInprogressPolls);
 router.get('/api/polls/:id', auth, pollsController.getPollById);
 router.post('/api/polls/start/:id', auth, pollsController.startPoll);
 router.post('/api/polls/stop/:id', auth, pollsController.stopPoll);
+router.post('/api/polls/vote/:id', auth, pollsController.votePoll);
+router.get('/api/polls/result/:id', auth, pollsController.resultPoll);
 
 export { router as pollsRouter };

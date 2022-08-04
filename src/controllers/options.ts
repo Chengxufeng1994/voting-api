@@ -12,7 +12,7 @@ export const addOption = async (req: Request, res: Response) => {
   const created_at = new Date();
   const updated_at = created_at;
   const newOption = await Option.create({
-    pollId,
+    poll: pollId,
     option,
     created_at,
     updated_at,
@@ -28,4 +28,10 @@ export const addOption = async (req: Request, res: Response) => {
   await poll.save();
 
   res.status(201).send(newOption);
+};
+
+export const listAllOptions = async (req: Request, res: Response) => {
+  const options = await Option.find().populate('poll');
+
+  res.status(200).send(options);
 };
