@@ -1,8 +1,11 @@
 import express from 'express';
+import "express-async-errors";
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import { usersRouter } from './routes/users';
-import { activitiesRouter } from './routes/activities';
+import { pollsRouter } from './routes/polls';
+import { currentUser } from './middlewares/current-user';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 
@@ -11,6 +14,7 @@ const app = express();
  * instruct express to trust it
  */
 app.set('trust proxy', true);
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     signed: false,
@@ -18,8 +22,10 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
+app.use(currentUser);
 app.use(usersRouter);
-app.use(activitiesRouter);
+app.use(pollsRouter);
+
+app.use(errorHandler);
 
 export { app };

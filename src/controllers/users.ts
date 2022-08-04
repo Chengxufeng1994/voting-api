@@ -7,7 +7,7 @@ export const signup = async (req: Request, res: Response) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    res.status(400).send('Identity in use');
+    return res.status(400).send('Identity in use');
   }
 
   const created_at = new Date();
@@ -41,11 +41,11 @@ export const signin = async (req: Request, res: Response) => {
   const existingUser = await User.findOne({ email });
 
   if (!existingUser) {
-    res.status(400).send('Invalid credentials');
+    return res.status(400).send('Invalid credentials');
   }
 
   if (identity !== existingUser?.identity) {
-    res.status(400).send('Invalid credentials');
+    return res.status(400).send('Invalid credentials');
   }
 
   const userJwt = jwt.sign(
