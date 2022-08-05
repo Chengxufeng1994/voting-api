@@ -1,11 +1,17 @@
 import { Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 import { Poll } from '../models/polls';
 
 export const createPoll = async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw errors.array();
+  }
   const userId = req.currentUser?.id;
   const { topic } = req.body;
   const created_at = new Date();
   const updated_at = created_at;
+
   const poll = await Poll.create({
     user: userId,
     topic,

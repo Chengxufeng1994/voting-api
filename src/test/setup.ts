@@ -29,12 +29,27 @@ afterAll(async () => {
 
 declare global {
   var signin: () => string[];
+  var generalSignin: () => string[];
 }
 
 global.signin = () => {
   const payload = {
     id: new mongoose.Types.ObjectId().toHexString(),
     email: 'admin@voting.io',
+    remark: 'admin'
+  };
+  const token = jwt.sign(payload, process.env.JWT_KEY!);
+  const session = { jwt: token };
+  const sessionJSON = JSON.stringify(session);
+  const base64 = Buffer.from(sessionJSON).toString('base64');
+  return [`session=${base64}`];
+};
+
+
+global.generalSignin = () => {
+  const payload = {
+    id: new mongoose.Types.ObjectId().toHexString(),
+    email: 'test@voting.io',
   };
   const token = jwt.sign(payload, process.env.JWT_KEY!);
   const session = { jwt: token };
