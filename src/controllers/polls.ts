@@ -21,13 +21,11 @@ export const createPoll = async (req: Request, res: Response) => {
 };
 
 export const getPollById = async (req: Request, res: Response) => {
-  const { id: pollId, page } = req.params;
-  const limit = 10;
-  const skip = limit * (Number(page) - 1);
+  const { id: pollId } = req.params;
 
   await Poll.findById(pollId)
     .populate('user')
-    .populate({ path: 'voted', options: { skip: skip, limit: limit } })
+    .populate('voted')
     .populate('options')
     .exec(function (err, poll) {
       if (err || !poll) {

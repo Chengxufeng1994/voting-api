@@ -5,6 +5,7 @@ import cookieSession from 'cookie-session';
 import { usersRouter } from './routes/users';
 import { pollsRouter } from './routes/polls';
 import { optionRouter } from './routes/options';
+import { votesRouter } from './routes/votes';
 import { currentUser } from './middlewares/current-user';
 import { errorHandler } from './middlewares/error-handler';
 
@@ -27,6 +28,7 @@ app.use(currentUser);
 app.use(usersRouter);
 app.use(pollsRouter);
 app.use(optionRouter);
+app.use(votesRouter);
 
 app.use(errorHandler);
 

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 interface pollDoc extends mongoose.Document {
-  user: mongoose.Schema.Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   topic: string;
-  options: [mongoose.Schema.Types.ObjectId];
-  voted: [mongoose.Schema.Types.ObjectId];
+  options: [mongoose.Types.ObjectId];
+  voted: [mongoose.Types.ObjectId];
   inProgress: boolean;
   created_at: Date;
   updated_at: Date;
@@ -29,7 +29,7 @@ const pollSchema = new mongoose.Schema({
   voted: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Vote',
     },
   ],
   inProgress: {
