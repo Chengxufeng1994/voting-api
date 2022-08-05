@@ -5,6 +5,7 @@ interface pollDoc extends mongoose.Document {
   topic: string;
   options: [mongoose.Types.ObjectId];
   voted: [mongoose.Types.ObjectId];
+  seen: [mongoose.Types.ObjectId];
   inProgress: boolean;
   created_at: Date;
   updated_at: Date;
@@ -30,6 +31,12 @@ const pollSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Vote',
+    },
+  ],
+  seen: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     },
   ],
   inProgress: {

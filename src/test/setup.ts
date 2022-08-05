@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 let mongo: any;
 
 beforeAll(async () => {
+  jest.setTimeout(200000);
   process.env.JWT_KEY = 'shhhhh';
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
