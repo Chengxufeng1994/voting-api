@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
 import { User } from '../models/users';
+import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw errors.array();
+  }
+
   const { identity, email, remark } = req.body;
   const existingUser = await User.findOne({ email });
 
