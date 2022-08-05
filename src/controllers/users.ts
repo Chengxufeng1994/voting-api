@@ -25,6 +25,7 @@ export const signup = async (req: Request, res: Response) => {
     {
       id: newUser.id,
       email: newUser.email,
+      remark: newUser.remark,
     },
     process.env.JWT_KEY!
   );
@@ -52,6 +53,7 @@ export const signin = async (req: Request, res: Response) => {
     {
       id: existingUser?.id,
       email: existingUser?.email,
+      remark: existingUser?.remark,
     },
     process.env.JWT_KEY!
   );

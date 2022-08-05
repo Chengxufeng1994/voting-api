@@ -10,6 +10,8 @@ const start = async () => {
   }
   await connectDatabase();
 
+  // require('./seeds/users');
+
   app.listen(PORT, () => {
     console.log(`Voting API listening on port ${PORT}`);
   });

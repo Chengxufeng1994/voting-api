@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import { Poll } from '../models/polls';
-import { User } from '../models/users';
-import { Option } from '../models/options';
 
 export const createPoll = async (req: Request, res: Response) => {
   const userId = req.currentUser?.id;

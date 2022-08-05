@@ -11,15 +11,25 @@ export const addVote = async (req: Request, res: Response) => {
   const option = await Option.findById(optionId);
   const created_at = new Date();
   const updated_at = created_at;
+
   if (!poll) {
     throw new Error('Poll not found');
   }
-  const foundOption = poll.options.find(
-    (opt) => new mongoose.Types.ObjectId(opt._id).toString() === optionId
-  );
+
   if (!option) {
     throw new Error('Option not found');
   }
+
+  const foundOption = poll.options.find(
+    (opt) => new mongoose.Types.ObjectId(opt._id).toString() === optionId
+  );
+
+  const existingVote = await Vote.find({ poll: pollId, user: userId });
+  console.log(existingVote);
+  if (existingVote.length > 0) {
+    throw new Error(`User: ${userId} already vote`);
+  }
+
   const vote = Vote.build({
     poll: new mongoose.Types.ObjectId(pollId),
     user: new mongoose.Types.ObjectId(userId),
