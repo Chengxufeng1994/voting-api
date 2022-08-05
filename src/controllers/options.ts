@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 import { Poll } from '../models/polls';
 import { Option } from '../models/options';
 
 export const addOption = async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    throw errors.array();
+  }
+
   const { pollId, option } = req.body;
   const poll = await Poll.findById(pollId);
   if (!poll) {
