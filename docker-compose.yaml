@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  app:
+    container_name: voting-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      JWT_KEY: shhhhh
+      MONGO_URI: 'mongodb://mongo:27017/voting'
+      NODE_ENV: test
+    depends_on:
+      - 'mongo'
+    volumes:
+      - ${PWD}:/app
+  mongo: 
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+
